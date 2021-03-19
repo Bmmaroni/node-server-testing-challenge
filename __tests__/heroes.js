@@ -19,7 +19,22 @@ describe("heroes integration tests", () => {
 	it("gets a list of superheroes", async () => {
 		const res = await supertest(server).get("/heroes")
 		expect(res.statusCode).toBe(200)
-		expect(res.headers).toBe("application/json")  // res.type instead?
+		expect(res.headers["content-type"]).toBe("application/json; charset=utf-8")
+		expect(res.body[0].name).toBe("Batman")
+		expect(res.body[2].name).toBe("Flash")
+	})
 
+	it("creates a hero", async () => {
+		const res = await supertest(server).post("/heroes").send({ name: "Wolverine"})
+		expect(res.statusCode).toBe(201)
+		expect(res.headers["content-type"]).toBe("application/json; charset=utf-8")
+		expect(res.body.name).toBe("Wolverine")
+	})
+
+	it("removes a hero", async () => {
+		const res = await supertest(server).delete("/heroes/2")
+		expect(res.statusCode).toBe(200)
+		expect(res.headers["content-type"]).toBe("application/json; charset=utf-8")
+		expect(res.body.name).toBe("Spiderman")
 	})
 })

@@ -6,5 +6,5 @@ exports.up = async function(knex) {
 }
 
 exports.down = async function(knex) {
-	await knex.scheme.dropTableIfExists("heroes")
+	await knex.schema.dropTableIfExists("heroes")
 }
