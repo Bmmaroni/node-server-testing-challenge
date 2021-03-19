@@ -1,16 +1,14 @@
 const express = require("express")
-const cors = require("cors")
-const alchemyRouter = require("./alchemy/alchemy-router")
+const heroesRouter = require("./heroes/heroes-router")
 
 const server = express()
 
-server.use(cors())
 server.use(express.json())
 
-server.use("/alchemy", alchemyRouter)
+server.use("/heroes", heroesRouter)
 server.get("/", (req, res) => {
 	res.json({
-		message: "Let's Make Some GOLD!",
+		message: "Justice Served Daily",
 	})
 })
 
